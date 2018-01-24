@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			position: relative;
+			left: 500px;
+			top: 100px;
+			width: 300px;
+			height: 300px;
+			background-color: gray;
+		}
+		.clock{
+			position: absolute;
+			left: 23px;
+			top: 23px;
+			width: 250px;
+			height: 250px;
+			background-color: gray;
+			border-radius: 50%;
+			border: 5px solid black;
+		}
+		.zhongxinqiu{
+			position: absolute;
+			left: 143px;
+			top: 143px;
+			width: 15px;
+			height: 15px;
+			background-color: #000;
+			border-radius: 50%;
+			z-index:999;
+		}
+		.hour{
+			position: absolute;
+			left: 147px;
+			top: 100px;
+			width: 6px;
+			height: 50px;
+			background-color: gold;
+			transform-origin:bottom; 
+			animation: hour 43200s linear infinite both;
+			/*z-index: 99;*/
+		}
+		.minute{
+			position: absolute;
+			left: 148px;
+			top: 80px;
+			width: 4px;
+			height: 70px;
+			background-color: #162457;
+			transform-origin:bottom;
+			animation: min 3600s linear infinite both;	
+			/*z-index: 99;*/
+		}
+		.second{
+			position: absolute;
+			left: 149px;
+			top: 60px;
+			width: 2px;
+			height: 90px;
+			background-color: #fdadfe;
+			transform-origin:bottom; 
+			animation: sec 60s linear infinite both;
+			/*z-index: 99;*/
+		}
+		/*.yuanpan{
+			position: absolute;
+			left: 54px;
+			top: 54px;
+			width: 200px;
+			height: 200px;
+			background-color: gray;
+			border-radius: 50%;
+		}*/
+		.time{
+			position: absolute;
+			font-size: 22px;
+			color: gold;
+		}	
+		.time.twe{
+			left: 140px;
+			top: 25px;
+		}
+		.time.nine{
+			left: 30px;
+			top: 140px;
+		}
+		.time.six{
+			left: 150px;
+			bottom: 20px;
+		}
+		.time.three{
+			top: 140px;
+			right: 25px;
+		}
+		
+
+		.line{
+			position: absolute;
+			width: 250px;
+			height: 4px;
+			top: 150px;
+			left: 25px;
+		}
+		.line.one{
+			transform: rotate(-60deg);
+		}
+		.line.two{
+			left: 28px;
+			transform: rotate(-30deg);
+		}
+		.line.four{
+			left: 29px;
+			transform: rotate(30deg);
+		}
+		.line.five{
+			left: 27px;
+			top: 152px;
+			transform: rotate(60deg);
+			/*background-color: blue;*/
+		}
+		.line span{
+			display: block;
+			width: 20px;
+			height: 5px;
+			background-color: black;
+			float: left;
+		}
+		.line .right{
+			float: right;
+		}
+		/*其实时分秒针转动函数一样，只是执行时间不同而已*/
+		/*=======秒针的转动========*/
+		@keyframes sec{
+			0%{
+				transform: rotate(0deg);
+			}
+			25%{
+				transform: rotate(90deg);
+			}
+			50%{
+				transform: rotate(180deg);
+			}
+			75%{
+				transform: rotate(270deg);
+			}
+			100%{
+				transform: rotate(360deg);
+			}
+		}
+
+		/*=======分针的转动=========*/
+		@keyframes min{
+			0%{
+				transform: rotate(0deg);
+			}
+			25%{
+				transform: rotate(90deg);
+			}
+			50%{
+				transform: rotate(180deg);
+			}
+			75%{
+				transform: rotate(270deg);
+			}
+			100%{
+				transform: rotate(360deg);
+			}
+		}
+
+		/*========时针的转动======*/
+		@keyframes hour{
+			0%{
+				transform: rotate(0deg);
+			}
+			25%{
+				transform: rotate(90deg);
+			}
+			50%{
+				transform: rotate(180deg);
+			}
+			75%{
+				transform: rotate(270deg);
+			}
+			100%{
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+</head>
+<body>
+		<div class="box">
+			<div class="clock"></div>
+			<div class="zhongxinqiu"></div>
+			<div class="hour"></div>
+			<div class="minute"></div>
+			<div class="second"></div>
+			<div class="line one"><span></span><span class="right"></span></div>
+			<div class="line two"><span></span><span class="right"></span></div>
+			<div class="line four"><span></span><span class="right"></span></div>
+			<div class="line five"><span></span><span class="right"></span></div>
+			<!-- <div class="yuanpan"></div> -->
+			<!-- <div class="time one">1</div> -->
+			<!-- <div class="time two">2</div> -->
+			<div class="time three">3</div>
+			<!-- <div class="time four">4</div> -->
+			<!-- <div class="time five">5</div> -->
+			<div class="time six">6</div>
+			<!-- <div class="time seven">7</div> -->
+			<!-- <div class="time eight">8</div> -->
+			<div class="time nine">9</div>
+			<!-- <div class="time ten">10</div> -->
+			<!-- <div class="time ele">11</div> -->
+			<div class="time twe">12</div>
+		</div>
+</body>
+</html>
