@@ -1,1 +1,204 @@
-<h1>这是一个h1</h1><h1>这是一个h1</h1><h1>这是一个h1</h1><h1>这是一个h1</h1><h1>这是一个h1</h1><h1>这是一个h1</h1><h1>这是一个h1</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+
+		.banner{
+			position: relative;
+			width: 1200px;
+			height: 400px;
+			margin: 100px auto;
+			border: 1px solid gray;
+			overflow: hidden;
+		}
+		.banner .uls{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 600%;
+			height: 100%;
+		}
+		.banner .uls li{
+			float: left;
+			width: 1200px;
+			height: 100%;
+		}
+		.banner .dots{
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+			/* width: 150px; */
+			/* height: 20px; */
+			/* background-color: #592648; */
+		}
+		.banner .dots li{
+			float: left;
+			width: 20px;
+			height: 20px;
+			margin: 10px;
+			border-radius: 50%;
+			background-color: red;
+		}
+		.banner .dots li:hover{
+			cursor: pointer;
+		}
+		.banner .dots li.active{
+		  background-color: white;
+		}
+		.arr{
+			position: absolute;
+			top: 150px;
+			/* left: 0; */
+			width: 50px;
+			height: 100px;
+			background-color: rgba(0, 0, 0, .6);
+		}
+		.arr_right{
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<ul class="uls"></ul>
+		<ul class="dots"></ul>
+		<a href="javascript:;" class="arr arr_left" onclick="jiantou(false)"></a>
+		<a href="javascript:;" class="arr arr_right" onclick="jiantou(true)"></a>
+	</div>
+
+	<script>
+		var imgArr = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','1.jpg'];
+		var banner = document.querySelector('.banner');
+		var uls = document.querySelectorAll('ul')[0];
+		var dots = document.querySelectorAll('ul')[1];
+		var ulsLis = uls.children;
+		var dotsLis = dots.children;
+		var count = 0;
+		var timer = null;
+		// window.onload = function(){
+
+		bindHtml();
+		autoPlay();
+		dotsClick();
+
+		banner.onmouseenter = function(){
+			clearInterval(timer);
+		}
+		banner.onmouseleave = function(){
+			autoPlay();
+		}
+
+		function bindHtml(){
+			var ulsStr = '';
+			var dotsStr = '';
+			for(var i = 0 ; i < imgArr.length ; i++){
+				ulsStr += '<li><img src="img-2/'+imgArr[i]+'"></img></li>';
+				if(i < imgArr.length - 1){
+					if(i == 0){
+						dotsStr += '<li class="active"><a herf="Javascript:;"></a></li>';
+					}else{
+						dotsStr += '<li><a herf="Javascript:;"></a></li>';
+					}
+				}
+			}
+			uls.innerHTML = ulsStr;
+			dots.innerHTML = dotsStr;
+		}
+
+		function animate(ele,count){
+			clearInterval(ele.timer);
+			ele.timer = setInterval(function(){
+				var ulsLisWidth = ulsLis[0].offsetWidth;
+				var target = -count * ulsLisWidth;
+				// var target = -imgArr.length * ulsLis[0].offsetWidth;
+				var leader = ele.offsetLeft;
+				var step = (target - leader)/10;
+				step = step > 0 ? Math.ceil(step) : Math.floor(step);
+				var left = leader + step;
+				ele.style.left = left + 'px';
+				if(target == left){
+					clearInterval(ele.timer);
+				}
+			},30)
+		}
+
+		function autoPlay(){
+			timer = setInterval(function(){
+				jiantou(true);
+				// count ++;
+				// if(count == imgArr.length){
+				// 	count = 1;
+				// 	uls.style.left = 0;
+				// }
+				// var ulsLisWidth = ulsLis[0].offsetWidth;
+				// var target = -count * ulsLisWidth;
+				// animate(uls,target);
+			},3000);
+		}
+
+		function jiantou(isRight){
+			if(isRight){
+				count ++;
+			// 	if(count == imgArr.length+1){
+			// 		count = 1;
+			// 		uls.style.left = 0;
+			// 	}
+			// }else{
+			// 	count --;
+			// 	if(count == -1){
+			// 		uls.style.left = -imgArr.length * 1200 + 'px';
+			// 		count = imgArr.length-1;
+				if(count == 6){
+					count = 1;
+					uls.style.left = 0;
+				}
+			}else{
+				count --;
+				if(count == -1){
+					uls.style.left = -5 * 1200 + 'px';
+					count = 4;
+				}
+			}
+			animate(uls,count);
+			if(count == 5){
+				addDotClass(0);
+			}else{
+				addDotClass(count);
+			}
+		}
+
+		function dotsClick(){
+			for(var j = 0 ; j < dotsLis.length ; j++){
+				dotsLis[j].index = j;
+				dotsLis[j].onclick = function(){
+					count = this.index;
+					addDotClass(count);
+					animate(uls,count);
+				}
+			}
+		}
+
+		function addDotClass(index){
+			for(var i = 0 ; i < dotsLis.length ; i ++){
+				if(dotsLis[i].getAttribute('class') == 'active'){
+					dotsLis[i].removeAttribute('class');
+				}
+			}
+			dotsLis[index].setAttribute('class','active');
+		}
+	// }
+	</script>
+</body>
+</html>
